@@ -12,6 +12,7 @@
 #define HUD_FADE_OUT_DURATION   (0.2)
 #define HUD_DISPLAY_DURATION    (2.0)
 #define HUD_ALPHA_VALUE         (0.6)
+#define HUD_CORNER_RADIUS       (18.0)
 
 #define MENUITEM_TAG_TOGGLE_LOGIN_ITEM 1
 #define STATUS_MENU_ICON @"icon-18x18.png"

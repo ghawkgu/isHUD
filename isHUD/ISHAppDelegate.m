@@ -8,9 +8,10 @@
 
 #import "ISHAppDelegate.h"
 #import <Carbon/Carbon.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface ISHAppDelegate ()
-@property (retain) NSTimer *timerToFadeOut;
+@property (strong) NSTimer *timerToFadeOut;
 - (void) fadeInHud;
 - (void) fadeOutHud;
 - (void) didFadeIn;
@@ -55,7 +56,8 @@
 				}
 			}
 		}
-		//[loginItemsArray release];
+        // WARNING! Fix this for ARC.
+		[loginItemsArray release];
 	}
     
     return retVal;
@@ -132,20 +134,17 @@
         self.timerToFadeOut = nil;
     }
     
-    if (fadingOut) {
-        [[self.window animator] stopAnimation];
-        fadingOut = NO;
-    }
+    fadingOut = NO;
     
     [self.window orderFrontRegardless];
-    [NSAnimationContext beginGrouping];
-    NSAnimationContext *context = [NSAnimationContext currentContext];
-    [context setDuration:HUD_FADE_IN_DURATION];
 
-    [context setCompletionHandler:^{ [self didFadeIn]; }];
+    [CATransaction begin];
+    [CATransaction setValue:[NSNumber numberWithFloat:HUD_FADE_IN_DURATION] forKey:kCATransactionAnimationDuration];
+    [CATransaction setValue:^{ [self didFadeIn]; } forKey:kCATransactionCompletionBlock];
+
+    [[self.panelView layer] setOpacity:1.0];
     
-    [[self.window animator] setAlphaValue:1.0];
-    [NSAnimationContext endGrouping];
+    [CATransaction commit];
 }
 
 - (void) didFadeIn {
@@ -154,19 +153,21 @@
 
 - (void)fadeOutHud {
     fadingOut = YES;
-    [NSAnimationContext beginGrouping];
-    NSAnimationContext *context = [NSAnimationContext currentContext];
-    [context setDuration:HUD_FADE_OUT_DURATION];
+    [CATransaction begin];
+    [CATransaction setValue:[NSNumber numberWithFloat:HUD_FADE_OUT_DURATION] forKey:kCATransactionAnimationDuration];
+    [CATransaction setValue:^{ [self didFadeOut]; } forKey:kCATransactionCompletionBlock];
     
-    [context setCompletionHandler:^{ [self didFadeOut]; }];
-
-    [[self.window animator] setAlphaValue:0.0];
-    [NSAnimationContext endGrouping];
+    [[self.panelView layer] setOpacity:0.0];
+    
+    [CATransaction commit];
 }
 
 - (void)didFadeOut {
+    if (fadingOut) {
+        GHKLOG(@"Did fade out!");
+        [self.window orderOut:nil];
+    }
     fadingOut = NO;
-    [self.window orderOut:nil];
 }
 
 #pragma mark - Main application
@@ -181,18 +182,19 @@
 
 -(void) initUIComponents {
     [self.window setOpaque:NO];
-    [self.window setAlphaValue:0.0];
     [self.window setBackgroundColor:[NSColor clearColor]];
-    [self.window setLevel:NSModalPanelWindowLevel];
+    [self.window setLevel:NSModalPanelWindowLevel]; //Make the window be the top most one while displayed.
+    [self.window setStyleMask:NSBorderlessWindowMask]; //No title bar;
     [self.window setHidesOnDeactivate:NO];
     // Make the window behavior like the menu bar.
     [self.window setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
         
     CALayer *viewLayer = [CALayer layer];
     [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, HUD_ALPHA_VALUE)]; //RGB plus Alpha Channel
-    [viewLayer setCornerRadius:18];
+    [viewLayer setCornerRadius:HUD_CORNER_RADIUS];
     [self.panelView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.panelView setLayer:viewLayer];
+    [[self.panelView layer] setOpacity:0.0];
 }
 
 
@@ -207,7 +209,6 @@
     // Initialize the menu.
     self.myStatusMenu = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [self.myStatusMenu setMenu:self.statusMenu];
-    //[statusItem setTitle:@"isHUD"];
     [self.myStatusMenu setImage:[NSImage imageNamed:STATUS_MENU_ICON]];
     [self.myStatusMenu setHighlightMode:YES];
     
@@ -237,7 +238,8 @@
         [self.isName setTitleWithMnemonic:name];
         NSURL *iconUrl = (__bridge NSURL *)TISGetInputSourceProperty(inputSource, kTISPropertyIconImageURL);
         GHKLOG(@"Icon url:%@", iconUrl);
-        self.isImage.image = [[NSImage alloc] initWithContentsOfURL:iconUrl];
+        // WARNING! Fix this for ARC.
+        self.isImage.image = [[[NSImage alloc] initWithContentsOfURL:iconUrl] autorelease];
         
         [self fadeInHud];
     }

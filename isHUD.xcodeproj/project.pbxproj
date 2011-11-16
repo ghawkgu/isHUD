@@ -286,12 +286,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isHUD/isHUD-Prefix.pch";
 				INFOPLIST_FILE = "isHUD/isHUD-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -300,12 +301,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isHUD/isHUD-Prefix.pch";
 				INFOPLIST_FILE = "isHUD/isHUD-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
