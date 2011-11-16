@@ -9,6 +9,13 @@
 
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
+## 系统运行环境
+- Mac OS X 10.6.x(Snow Leopard)+
+
+## 构建环境
+- Mac OS X 10.7.2(Lion)
+- XCode 4.2
+
 ## 许可证
 isHUD 基于 MIT 许可证。你可以随意使用该应用程序以及相关的源码。
 

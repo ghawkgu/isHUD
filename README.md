@@ -7,6 +7,13 @@ With isHUD, everytime you change the input source, a HUD will appear right in th
 
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
+## System requirements
+- Mac OS X 10.6.x(Snow Leopard)+
+
+## Build environment
+- Mac OS X 10.7.2(Lion)
+- XCode 4.2
+
 ## License
 isHUD is licenced under the MIT license. So, feel free to use this utility and the source code.
 

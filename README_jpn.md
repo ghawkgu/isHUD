@@ -7,6 +7,13 @@ isHUDは、入力ソースが変わったときに、スクーンの真ん中で
 
 ![スクリーンショット](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-jpn.jpg)
 
+## 動作環境
+- Mac OS X 10.6.x(Snow Leopard)+
+
+## ビルド環境
+- Mac OS X 10.7.2(Lion)
+- XCode 4.2
+
 ## ライセンス
 isHUD は MIT ライセンスでリリースされています。このユティリティーや、ソースコードを自由にご利用ください。
 
