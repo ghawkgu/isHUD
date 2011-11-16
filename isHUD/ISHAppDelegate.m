@@ -13,6 +13,8 @@
 @property (retain) NSTimer *timerToFadeOut;
 - (void) fadeInHud;
 - (void) fadeOutHud;
+- (void) didFadeIn;
+- (void) didFadeOut;
 @end
 
 #pragma mark - Login item helpers
@@ -139,15 +141,15 @@
     [NSAnimationContext beginGrouping];
     NSAnimationContext *context = [NSAnimationContext currentContext];
     [context setDuration:HUD_FADE_IN_DURATION];
-    [context setCompletionHandler:^{
-        dispatch_queue_t mainQueue = dispatch_get_main_queue();
-        dispatch_async(mainQueue, ^{
-            self.timerToFadeOut = [NSTimer scheduledTimerWithTimeInterval:HUD_DISPLAY_DURATION target:self selector:@selector(fadeOutHud) userInfo:nil repeats:NO];
-        });
-    }];
+
+    [context setCompletionHandler:^{ [self didFadeIn]; }];
     
-    [[self.window animator] setAlphaValue:1.0];    
+    [[self.window animator] setAlphaValue:1.0];
     [NSAnimationContext endGrouping];
+}
+
+- (void) didFadeIn {
+    self.timerToFadeOut = [NSTimer scheduledTimerWithTimeInterval:HUD_DISPLAY_DURATION target:self selector:@selector(fadeOutHud) userInfo:nil repeats:NO];
 }
 
 - (void)fadeOutHud {
@@ -155,16 +157,16 @@
     [NSAnimationContext beginGrouping];
     NSAnimationContext *context = [NSAnimationContext currentContext];
     [context setDuration:HUD_FADE_OUT_DURATION];
-    [context setCompletionHandler:^{
-        fadingOut = NO;
-        dispatch_queue_t mainQueue = dispatch_get_main_queue();
-        dispatch_async(mainQueue, ^{
-            [self.window orderOut:nil];
-        });
-    }];
+    
+    [context setCompletionHandler:^{ [self didFadeOut]; }];
 
     [[self.window animator] setAlphaValue:0.0];
     [NSAnimationContext endGrouping];
+}
+
+- (void)didFadeOut {
+    fadingOut = NO;
+    [self.window orderOut:nil];
 }
 
 #pragma mark - Main application
