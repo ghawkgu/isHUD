@@ -1,4 +1,4 @@
-# isHUD - A OSX Head-up Display for  input sources
+# isHUD - An OSX Head-up Display for input sources
 
 ## Why
 As a multilanguage Mac OS X user, I use the default shortcut keys (Command+Space, Option+Command+Space) to switch between input sources. But when I press Option+Command+Space (Select the next input source), the system wild input source overlay doesn't appear. With the Lion's new cool stuff, fullscreen mode, it's inconvenient for me to check the current input source.
