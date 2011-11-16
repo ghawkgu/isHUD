@@ -1,0 +1,19 @@
+//
+// Prefix header for all source files of the 'isHUD' target in the 'isHUD' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+
+#pragma mark - Macros for DEBUG
+#ifdef DEBUG
+
+#define GHKLOG(...) NSLog(__VA_ARGS__)
+
+#else
+
+#define GHKLOG(...)
+
+#endif //DEBUG
