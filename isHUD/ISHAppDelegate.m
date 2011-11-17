@@ -121,11 +121,12 @@
 @synthesize timerToFadeOut = _timerToFadeOut;
 @synthesize myStatusMenu = _myStatusMenu;
 
-// We don't need this 'cause now we have ARC.
-//- (void)dealloc
-//{
-//    [super dealloc];
-//}
+// WARNING! Fix this for ARC.
+- (void) dealloc {
+    self.timerToFadeOut = nil;
+    self.myStatusMenu = nil;
+    [super dealloc];
+}
 
 #pragma mark - Window fadding in/out animation
 - (void)fadeInHud {
