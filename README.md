@@ -7,6 +7,9 @@ With isHUD, everytime you change the input source, a HUD will appear right in th
 
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
+## Download the app binary
+- [isHUD-current.zip (v0.2)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+
 ## System requirements
 - Mac OS X 10.6.x(Snow Leopard)+
 

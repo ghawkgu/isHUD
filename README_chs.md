@@ -9,6 +9,9 @@
 
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
+## 直接下载应用程序
+- [isHUD-current.zip (v0.2)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+
 ## 系统运行环境
 - Mac OS X 10.6.x(Snow Leopard)+
 
