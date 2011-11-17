@@ -15,6 +15,9 @@
 ## 如何使用
 - 将 isHUD.app 移动到 “应用程序” 目录中, 像其他应用程序一样双击启动。
 
+## 获取源码
+- [isHUD 托管在 github 上](https://github.com/ghawkgu/isHUD/blob/master/README_chs.md)
+
 ## 系统运行环境
 - Mac OS X 10.6.x(Snow Leopard)+
 

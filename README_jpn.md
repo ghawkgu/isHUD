@@ -10,6 +10,9 @@ isHUDは、入力ソースが変わったときに、スクーンの真ん中で
 ## バイナリダウンロード
 - [isHUD-current.zip (v0.3)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
+## ソースコード
+- [isHUDのソースコードはgithubにあります。](https://github.com/ghawkgu/isHUD/blob/master/README_jpn.md)
+
 ## 使い方
 - isHUD.app を 「アプリケーション」ディレクトリーに置いて、ほかのアプリと同じようにダブルクリックして実行してください。
 
