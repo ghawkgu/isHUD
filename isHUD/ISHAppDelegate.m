@@ -254,7 +254,7 @@
 -(void) initUIComponents {
     [self.window setOpaque:NO];
     [self.window setBackgroundColor:[NSColor clearColor]];
-    [self.window setLevel:NSModalPanelWindowLevel]; //Make the window be the top most one while displayed.
+    [self.window setLevel:kCGUtilityWindowLevelKey]; //Make the window be the top most one while displayed.
     [self.window setStyleMask:NSBorderlessWindowMask]; //No title bar;
     [self.window setHidesOnDeactivate:NO];
     // Make the window behavior like the menu bar.
