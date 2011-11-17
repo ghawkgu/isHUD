@@ -171,7 +171,7 @@
     fadingOut = NO;
 }
 
-#pragma mark - Main application
+#pragma mark - HUD size adjustment
 - (NSString *)getLongestInputSourceName {
     NSDictionary *filter = [NSDictionary dictionaryWithObject:(__bridge NSString *)kTISCategoryKeyboardInputSource
                                                        forKey:(__bridge NSString *)kTISPropertyInputSourceCategory];
@@ -238,11 +238,11 @@
     [self.isName setFrame:labelFrame];
 }
 
+#pragma mark - Main application
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
     GHKLOG(@"Initialized!");
-    [self getLongestInputSourceName];
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(inputSourceChanged:)
                                                             name:(NSString *)kTISNotifySelectedKeyboardInputSourceChanged object:nil];
@@ -250,6 +250,10 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(enabledInputSourceChanged:)
                                                             name:(NSString *)kTISNotifyEnabledKeyboardInputSourcesChanged object:nil];
+    
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(screenSizeChanged:)
+                                                            name:(NSString *)NSApplicationDidChangeScreenParametersNotification object:nil];
 }
 
 -(void) initUIComponents {
@@ -323,6 +327,10 @@
 }
 
 - (void)enabledInputSourceChanged:(NSNotification *) notification {
+    [self setUpHUD];
+}
+
+- (void)screenSizeChanged:(NSNotification *) notification {
     [self setUpHUD];
 }
 
