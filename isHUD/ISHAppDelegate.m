@@ -185,16 +185,11 @@
     
     for (int i = 0; i < [inputSources count]; i++) {
         inputSource = (__bridge TISInputSourceRef)[inputSources objectAtIndex:i];
-        //void *selectable = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelectCapable);
-        //void *isId = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID);
-        //void *bundleId = TISGetInputSourceProperty(inputSource, kTISPropertyBundleID);
-        NSString *isModeId = TISGetInputSourceProperty(inputSource, kTISPropertyInputModeID);
-        
-        //if (!CFBooleanGetValue(selectable)) continue;
-        
+
+        NSString *isModeId = TISGetInputSourceProperty(inputSource, kTISPropertyInputModeID);        
         name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
         
-        if ([isModeId isEqualToString:name]) continue;
+        if ([isModeId isEqualToString:name]) continue; //Bypass some input source modes.
         
         GHKLOG(@"Found input method: %@", name);
         currentLengthOfName = [name length];
