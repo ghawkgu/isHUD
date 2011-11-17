@@ -8,7 +8,14 @@ With isHUD, everytime you change the input source, a HUD will appear right in th
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
 ## Download the app binary
-- [isHUD-current.zip (v0.2)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.3)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+
+## Change log
+- v0.2
+	- The 1st release
+- v0.3
+	- [Bug fix] The HUD will auto resize itself to match the name of the input source.
+	- [Bug fix] When the screen resolution is changed, the HUD will stay in the middle of the screen.
 
 ## System requirements
 - Mac OS X 10.6.x(Snow Leopard)+

@@ -10,7 +10,14 @@
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
 ## 直接下载应用程序
-- [isHUD-current.zip (v0.2)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.3)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+
+## 变更日志
+- v0.2
+	- 初版发布
+- v0.3
+	- [BUG修正] HUD现在会根据输入源名称的长短自动调整尺寸。
+	- [BUG修正]屏幕分辨率变化时会自动回到屏幕中央。
 
 ## 系统运行环境
 - Mac OS X 10.6.x(Snow Leopard)+
