@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define HUD_FADE_IN_DURATION    (0.2)
-#define HUD_FADE_OUT_DURATION   (0.2)
+#define HUD_FADE_IN_DURATION    (0.25)
+#define HUD_FADE_OUT_DURATION   (0.5)
 #define HUD_DISPLAY_DURATION    (2.0)
 #define HUD_ALPHA_VALUE         (0.6)
 #define HUD_CORNER_RADIUS       (18.0)

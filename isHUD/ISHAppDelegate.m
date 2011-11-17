@@ -266,7 +266,7 @@
     [self.window setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
         
     CALayer *viewLayer = [CALayer layer];
-    [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, HUD_ALPHA_VALUE)]; //RGB plus Alpha Channel
+    [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.05, 0.05, 0.05, HUD_ALPHA_VALUE)]; //RGB plus Alpha Channel
     [viewLayer setCornerRadius:HUD_CORNER_RADIUS];
     [self.panelView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.panelView setLayer:viewLayer];
