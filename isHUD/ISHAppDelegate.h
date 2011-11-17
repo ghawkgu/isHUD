@@ -14,6 +14,9 @@
 #define HUD_ALPHA_VALUE         (0.6)
 #define HUD_CORNER_RADIUS       (18.0)
 
+#define HUD_HORIZONTAL_MARGIN   (30)
+#define HUD_HEIGHT              (100)
+
 #define MENUITEM_TAG_TOGGLE_LOGIN_ITEM 1
 #define STATUS_MENU_ICON @"icon-18x18.png"
 

@@ -172,13 +172,84 @@
 }
 
 #pragma mark - Main application
+- (NSString *)getLongestInputSourceName {
+    NSDictionary *filter = [NSDictionary dictionaryWithObject:(__bridge NSString *)kTISCategoryKeyboardInputSource
+                                                       forKey:(__bridge NSString *)kTISPropertyInputSourceCategory];
+    
+    NSArray *inputSources = (__bridge NSArray *)TISCreateInputSourceList((__bridge CFDictionaryRef)filter, false);
+    
+    TISInputSourceRef inputSource;
+    NSString *name;
+    NSString *nameForMaxLength;
+    NSUInteger currentLengthOfName = 0, maxLengthOfName = 0;
+    
+    for (int i = 0; i < [inputSources count]; i++) {
+        inputSource = (__bridge TISInputSourceRef)[inputSources objectAtIndex:i];
+        //void *selectable = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelectCapable);
+        //void *isId = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID);
+        //void *bundleId = TISGetInputSourceProperty(inputSource, kTISPropertyBundleID);
+        NSString *isModeId = TISGetInputSourceProperty(inputSource, kTISPropertyInputModeID);
+        
+        //if (!CFBooleanGetValue(selectable)) continue;
+        
+        name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
+        
+        if ([isModeId isEqualToString:name]) continue;
+        
+        GHKLOG(@"Found input method: %@", name);
+        currentLengthOfName = [name length];
+        if (currentLengthOfName > maxLengthOfName) {
+            maxLengthOfName = currentLengthOfName;
+            nameForMaxLength = name;
+        }
+    }
+    
+    GHKLOG(@"The input method with the longest name is: %@", nameForMaxLength);
+    return nameForMaxLength;
+}
+
+- (void)setUpHUD {
+    //Set the longest name in the label, the make the label to autofit the name.
+    [self.isName setStringValue:[self getLongestInputSourceName]];
+    [self.isName sizeToFit];
+    
+    //Re-calculate the window frame and the the positions of subviews.
+    CGRect labelFrame = [self.isName frame];
+    CGRect windowFrame = [self.window frame];
+    GHKLOG(@"label:(%f, %f) (%f x %f) ", labelFrame.origin.x, labelFrame.origin.y, labelFrame.size.width, labelFrame.size.height);
+    GHKLOG(@"window:(%f, %f) (%f x %f) ", windowFrame.origin.x, windowFrame.origin.y, windowFrame.size.width, windowFrame.size.height);
+    
+    windowFrame.size.width = labelFrame.size.width + HUD_HORIZONTAL_MARGIN * 2;
+    windowFrame.size.height = HUD_HEIGHT;
+    
+    NSRect screenRect = [[[NSScreen screens] objectAtIndex:0] visibleFrame];
+    windowFrame.origin.x = (screenRect.size.width - windowFrame.size.width) / 2;
+    windowFrame.origin.y = (screenRect.size.height - windowFrame.size.height) / 2;
+    
+    [self.window setFrame:windowFrame display:YES];
+    
+    NSRect viewFrame = windowFrame;
+    viewFrame.origin.x = 0;
+    viewFrame.origin.y = 0;
+    [self.panelView setFrame:viewFrame];
+    
+    labelFrame.origin.x = HUD_HORIZONTAL_MARGIN;
+    labelFrame.origin.y = (windowFrame.size.height - labelFrame.size.height) / 2;
+    [self.isName setFrame:labelFrame];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
     GHKLOG(@"Initialized!");
+    [self getLongestInputSourceName];
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(inputSourceChanged:)
                                                             name:(NSString *)kTISNotifySelectedKeyboardInputSourceChanged object:nil];
+    
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(enabledInputSourceChanged:)
+                                                            name:(NSString *)kTISNotifyEnabledKeyboardInputSourcesChanged object:nil];
 }
 
 -(void) initUIComponents {
@@ -196,6 +267,8 @@
     [self.panelView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.panelView setLayer:viewLayer];
     [[self.panelView layer] setOpacity:0.0];
+    
+    [self setUpHUD];
 }
 
 
@@ -236,7 +309,9 @@
     //Display the input source name only if it has changed.
     if (![previousIsName isEqualToString:name]) {
         previousIsName = name;
+        
         [self.isName setStringValue:name];
+                        
         NSURL *iconUrl = (__bridge NSURL *)TISGetInputSourceProperty(inputSource, kTISPropertyIconImageURL);
         GHKLOG(@"Icon url:%@", iconUrl);
         // WARNING! Fix this for ARC.
@@ -245,6 +320,10 @@
         [self fadeInHud];
     }
 
+}
+
+- (void)enabledInputSourceChanged:(NSNotification *) notification {
+    [self setUpHUD];
 }
 
 #pragma mark - Menu item event handler
