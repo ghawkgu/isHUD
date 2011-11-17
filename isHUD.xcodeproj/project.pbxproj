@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E06496EC14737582008B28E0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E06496EB14737582008B28E0 /* icon.icns */; };
-		E06497021473871D008B28E0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E06497011473871D008B28E0 /* README.md */; };
+		E093DDE9147525AE00ACB3FA /* CHANGELOG_jpn.md in Resources */ = {isa = PBXBuildFile; fileRef = E093DDE8147525AE00ACB3FA /* CHANGELOG_jpn.md */; };
 		E0966B8B147173F300D2444F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0966B8A147173F300D2444F /* Cocoa.framework */; };
 		E0966B95147173F300D2444F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E0966B93147173F300D2444F /* InfoPlist.strings */; };
 		E0966B97147173F300D2444F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0966B96147173F300D2444F /* main.m */; };
@@ -32,6 +32,9 @@
 		E06496FD14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		E06496FE14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E06497011473871D008B28E0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		E093DDE51475248700ACB3FA /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		E093DDE61475254700ACB3FA /* CHANGELOG_chs.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG_chs.md; sourceTree = "<group>"; };
+		E093DDE8147525AE00ACB3FA /* CHANGELOG_jpn.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG_jpn.md; sourceTree = "<group>"; };
 		E0966B86147173F300D2444F /* isHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = isHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0966B8A147173F300D2444F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E0966B8D147173F300D2444F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -67,15 +70,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E0966B7B147173F300D2444F = {
+		E093DDE71475255D00ACB3FA /* Documents */ = {
 			isa = PBXGroup;
 			children = (
+				E093DDE51475248700ACB3FA /* CHANGELOG.md */,
+				E093DDE61475254700ACB3FA /* CHANGELOG_chs.md */,
+				E093DDE8147525AE00ACB3FA /* CHANGELOG_jpn.md */,
 				E06497011473871D008B28E0 /* README.md */,
 				E0A5466214739F9500E28C2F /* README_chs.md */,
 				E0A5466314739F9500E28C2F /* README_jpn.md */,
 				E0A5466114739F9500E28C2F /* MIT-LICENSE.txt */,
-				E0966BAD14724E9D00D2444F /* QuartzCore.framework */,
-				E0966BA7147177BF00D2444F /* Carbon.framework */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
+		E0966B7B147173F300D2444F = {
+			isa = PBXGroup;
+			children = (
+				E093DDE71475255D00ACB3FA /* Documents */,
 				E0966B90147173F300D2444F /* isHUD */,
 				E0966B89147173F300D2444F /* Frameworks */,
 				E0966B87147173F300D2444F /* Products */,
@@ -93,6 +105,8 @@
 		E0966B89147173F300D2444F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E0966BAD14724E9D00D2444F /* QuartzCore.framework */,
+				E0966BA7147177BF00D2444F /* Carbon.framework */,
 				E0966B8A147173F300D2444F /* Cocoa.framework */,
 				E0966B8C147173F300D2444F /* Other Frameworks */,
 			);
@@ -190,10 +204,10 @@
 				E0966BB414726F5D00D2444F /* icon.png in Resources */,
 				E0966BBA1472724B00D2444F /* icon-18x18.png in Resources */,
 				E06496EC14737582008B28E0 /* icon.icns in Resources */,
-				E06497021473871D008B28E0 /* README.md in Resources */,
 				E0A5466414739F9500E28C2F /* MIT-LICENSE.txt in Resources */,
 				E0A5466514739F9500E28C2F /* README_chs.md in Resources */,
 				E0A5466614739F9500E28C2F /* README_jpn.md in Resources */,
+				E093DDE9147525AE00ACB3FA /* CHANGELOG_jpn.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

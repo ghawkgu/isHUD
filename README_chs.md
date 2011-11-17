@@ -12,12 +12,8 @@
 ## 直接下载应用程序
 - [isHUD-current.zip (v0.3)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
-## 变更日志
-- v0.2
-	- 初版发布
-- v0.3
-	- [BUG修正] HUD现在会根据输入源名称的长短自动调整尺寸。
-	- [BUG修正]屏幕分辨率变化时会自动回到屏幕中央。
+## 如何使用
+- 将 isHUD.app 移动到 “应用程序” 目录中, 像其他应用程序一样双击启动。
 
 ## 系统运行环境
 - Mac OS X 10.6.x(Snow Leopard)+
