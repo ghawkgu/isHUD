@@ -236,7 +236,7 @@
     //Display the input source name only if it has changed.
     if (![previousIsName isEqualToString:name]) {
         previousIsName = name;
-        [self.isName setTitleWithMnemonic:name];
+        [self.isName setStringValue:name];
         NSURL *iconUrl = (__bridge NSURL *)TISGetInputSourceProperty(inputSource, kTISPropertyIconImageURL);
         GHKLOG(@"Icon url:%@", iconUrl);
         // WARNING! Fix this for ARC.
