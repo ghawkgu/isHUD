@@ -24,13 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E06496E71473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/guyi/workspace/playground/isHUD/isHUD/zh-Hans.lproj/MainMenu.xib"; sourceTree = "<absolute>"; };
-		E06496E81473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/guyi/workspace/playground/isHUD/isHUD/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
-		E06496E914737556008B28E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = /Users/guyi/workspace/playground/isHUD/isHUD/ja.lproj/MainMenu.xib; sourceTree = "<absolute>"; };
-		E06496EA14737556008B28E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = /Users/guyi/workspace/playground/isHUD/isHUD/ja.lproj/InfoPlist.strings; sourceTree = "<absolute>"; };
+		E06496E71473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		E06496E81473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E06496E914737556008B28E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		E06496EA14737556008B28E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E06496EB14737582008B28E0 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		E06496FD14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "/Users/guyi/workspace/playground/isHUD/isHUD/zh-Hant.lproj/MainMenu.xib"; sourceTree = "<absolute>"; };
-		E06496FE14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/guyi/workspace/playground/isHUD/isHUD/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
+		E06496FD14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		E06496FE14738617008B28E0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E06497011473871D008B28E0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E0966B86147173F300D2444F /* isHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = isHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0966B8A147173F300D2444F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
