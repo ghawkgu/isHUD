@@ -33,4 +33,5 @@
 
 - (IBAction)quit:(id)sender;
 - (IBAction)toggleLoginItem:(id)sender;
+- (IBAction)onHotKey:(id)sender;
 @end

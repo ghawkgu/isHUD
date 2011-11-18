@@ -25,6 +25,12 @@
 - (void) deleteAppFromLoginItem;
 @end
 
+#pragma mark - HotKey
+@interface ISHAppDelegate (HotKey)
+- (void)registerHotKey;
+- (void)unregisterHotKey;
+@end
+
 #pragma mark - Implemetation
 @implementation ISHAppDelegate (LoginItem)
 // I copied the codes from the following blog. And a little modification.
@@ -303,10 +309,13 @@
     } else {
         [self updateLoginItemMenuState:NSOffState];
     }
+    
+    [self registerHotKey];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
     [[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+    [self unregisterHotKey];
 }
 
 - (void)inputSourceChanged:(NSNotification *) notification {
@@ -357,7 +366,10 @@
         [self addAppAsLoginItem];
         [self updateLoginItemMenuState:NSOnState];
     }
+}
 
+- (IBAction)onHotKey:(id)sender {
+    [self fadeInHud];
 }
 
 @end
