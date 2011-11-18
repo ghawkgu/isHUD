@@ -5,10 +5,12 @@ As a multilanguage Mac OS X user, I use the default shortcut keys (Command+Space
 
 With isHUD, everytime you change the input source, a HUD will appear right in the middle of the screen, which means there's no more need to move your eye to check the input source.
 
+By using the KeysRemap4MacBook, you can even [change the input source with just one-key-press(The blog has not been translated into English yet.)](http://www.think-in-g.net/ghawk/blog/2011/11/os-x-mappging-a-single-key-to-select-input-source/).
+
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
 ## Download the app binary
-- [isHUD-current.zip (v0.3)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.4)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
 ## How to use
 - Just drag/move the isHUD.app into the Applications directory, open it as other app.
