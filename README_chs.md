@@ -5,7 +5,7 @@
 
 有了isHUD，每当切换输入法的时候，屏幕中央就会出现一个HUD窗口，提示选中的输入法，这样，你无须移动视线就能知道所选的输入法了。
 
-如果你想要更快捷地切换输入法，那么[这篇博客也许对你有用](http://www.think-in-g.net/ghawk/blog/2011/11/os-x-mappging-a-single-key-to-select-input-source/)。
+如果你想要更快捷地切换输入法，那么结合[KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/)，可以实现一键切换输入法，[具体方法请看这篇博客中的介绍](http://www.think-in-g.net/ghawk/blog/2011/11/os-x-mappging-a-single-key-to-select-input-source/)。
 
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
