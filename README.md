@@ -10,7 +10,7 @@ By using the [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/), you c
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
 ## Download the app binary
-- [isHUD-current.zip (v0.4)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.5)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
 ## How to use
 - Just drag/move the isHUD.app into the Applications directory, open it as other app.

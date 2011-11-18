@@ -1,5 +1,9 @@
 # Change log
 
+## v0.5
+- [Bug fix] Eliminate memory leaks.
+- [Experimental] Add hotkey support. Press Option+Esc to show the HUD with the current selected input source.
+
 ## v0.4
 - [Enhancement] The HUD is shown as the top most window even in Dashboard. 
 
