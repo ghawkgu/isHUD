@@ -25,40 +25,42 @@
 - (void) deleteAppFromLoginItem;
 @end
 
+#pragma mark - Implemetation
 @implementation ISHAppDelegate (LoginItem)
 // I copied the codes from the following blog. And a little modification.
 // http://cocoatutorial.grapewave.com/2010/02/creating-andor-removing-a-login-item/
 
 -(LSSharedFileListItemRef) findLoginItem:(LSSharedFileListRef)loginItems {
+    LSSharedFileListItemRef retVal = NULL;
+    if (!loginItems) return retVal;
+    
     NSString *appPath = [[NSBundle mainBundle] bundlePath];
     
     // This will retrieve the path for the application
 	// For example, /Applications/test.app
-    CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
+    NSURL *url = [NSURL new];
     
-    LSSharedFileListItemRef retVal = NULL;
-    
-    if (loginItems) {
-		UInt32 seedValue;
-		//Retrieve the list of Login Items and cast them to
-		// a NSArray so that it will be easier to iterate.
-		NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
-		int i = 0;
-		for(; i< [loginItemsArray count]; i++){
-			LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)[loginItemsArray
-                                                                        objectAtIndex:i];
-			//Resolve the item with URL
-			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
-				NSString * urlPath = [(__bridge NSURL*)url path];
-				if ([urlPath compare:appPath] == NSOrderedSame){
-					retVal = itemRef;
-                    break;
-				}
-			}
-		}
-        // WARNING! Fix this for ARC.
-		[loginItemsArray release];
-	}
+    UInt32 seedValue;
+    //Retrieve the list of Login Items and cast them to
+    // a NSArray so that it will be easier to iterate.
+    NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+    int i = 0;
+    for(; i< [loginItemsArray count]; i++){
+        LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray
+                                                                    objectAtIndex:i];
+        //Resolve the item with URL
+        if (LSSharedFileListItemResolve(itemRef, 0, (__bridge CFURLRef*) &url, NULL) == noErr) {
+            NSString * urlPath = [url path];
+            [url release]; // The resolved url must be released!
+            if ([urlPath compare:appPath] == NSOrderedSame){
+                CFRetain(itemRef);
+                retVal = itemRef;
+                break;
+            }
+        }
+    }
+    // WARNING! Fix this for ARC.
+    [loginItemsArray release];
     
     return retVal;
 }
@@ -67,7 +69,13 @@
 	// Create a reference to the shared file list.
 	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
                                                             kLSSharedFileListSessionLoginItems, NULL);
-    return [self findLoginItem:loginItems] ? YES : NO;
+    LSSharedFileListItemRef listItemRef = [self findLoginItem:loginItems];
+    CFRelease(loginItems);
+    
+    BOOL retVal = [self findLoginItem:loginItems] ? YES : NO;
+    
+    CFRelease(listItemRef);
+    return retVal;
 }
 
 -(void) addAppAsLoginItem{
@@ -106,7 +114,10 @@
     
     if (itemRef) {
         LSSharedFileListItemRemove(loginItems,itemRef);
+        CFRelease(itemRef);
     }
+    
+    CFRelease(loginItems);
 }
 @end
 
@@ -198,6 +209,8 @@
             nameForMaxLength = name;
         }
     }
+    
+    [inputSources release];
     
     GHKLOG(@"The input method with the longest name is: %@", nameForMaxLength);
     return nameForMaxLength;
@@ -302,6 +315,7 @@
     TISInputSourceRef inputSource = TISCopyCurrentKeyboardInputSource();
     NSString *name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
     GHKLOG(@"The im name is: %@", name);
+    CFRelease(inputSource);
     
     static NSString *previousIsName = nil;
     
