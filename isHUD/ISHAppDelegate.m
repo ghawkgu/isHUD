@@ -78,9 +78,13 @@
     LSSharedFileListItemRef listItemRef = [self findLoginItem:loginItems];
     CFRelease(loginItems);
     
-    BOOL retVal = [self findLoginItem:loginItems] ? YES : NO;
+    BOOL retVal = NO;
     
-    CFRelease(listItemRef);
+    if ([self findLoginItem:loginItems]) {
+        retVal = YES;
+        CFRelease(listItemRef);
+    }
+    
     return retVal;
 }
 
@@ -278,6 +282,7 @@
     [self.window setHidesOnDeactivate:NO];
     // Make the window behavior like the menu bar.
     [self.window setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
+    [self.window makeKeyWindow];
         
     CALayer *viewLayer = [CALayer layer];
     [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.05, 0.05, 0.05, HUD_ALPHA_VALUE)]; //RGB plus Alpha Channel
