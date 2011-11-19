@@ -392,4 +392,8 @@
     self.timerForHotKeyDelay = nil;
 }
 
+- (IBAction)showHud:(id)sender {
+    [self fadeInHud];
+}
+
 @end

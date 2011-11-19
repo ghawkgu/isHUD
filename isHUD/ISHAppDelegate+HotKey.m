@@ -7,46 +7,63 @@
 //
 
 #import "ISHAppDelegate.h"
-#import <ApplicationServices/ApplicationServices.h>
+#import "ISHKeyCode.h"
 
-CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,  CGEventRef event, void *refcon);
-CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,  CGEventRef event, void *refcon) {    
-    CGEventFlags modifierFlags = CGEventGetFlags(event);
-    modifierFlags = modifierFlags & NSDeviceIndependentModifierFlagsMask;
-    GHKLOG(@"Modifier flag changed! %llX", modifierFlags);
-    
-    if ((modifierFlags & NSDeviceIndependentModifierFlagsMask) == kCGEventFlagMaskSecondaryFn) {
-        GHKLOG(@"Fn pressed.");
-        [(ISHAppDelegate *)[NSApp delegate] onHotKey:nil];
-    } else if ((modifierFlags & NSDeviceIndependentModifierFlagsMask) != kCGEventFlagMaskSecondaryFn) {
-        GHKLOG(@"Fn not pressed.");
-        [(ISHAppDelegate *)[NSApp delegate] cancelHotKey:nil];
-    }
-    
-    return event; 
-}
+typedef void (^GlobalEventHandler)(NSEvent*);
+typedef NSEvent* (^LocalEventHandler)(NSEvent*);
 
 @implementation ISHAppDelegate (Hotkey)
-NSMachPort *eventTap;
+
+-(void) fnPressed:(NSEvent*)event {
+    static NSTimeInterval lastPressedTimestamp = NSTimeIntervalSince1970;
+    NSTimeInterval fnPressedTimestamp = [event timestamp];
+    if (fnPressedTimestamp - lastPressedTimestamp <= HOT_KEY_DOUBLE_STRIKE_INTERVAL) {
+        [self showHud:nil];
+    }
+    lastPressedTimestamp = fnPressedTimestamp;
+}
+
+-(void)handleKeyEvent:(NSEvent *)event {
+    GHKLOG(@"NSEvent! %lx %f", [event modifierFlags], [event timestamp] );
+    NSUInteger modifierFlags = [event modifierFlags];
+    if ((modifierFlags & COMMAND_L)== COMMAND_L) {
+        GHKLOG(@"Command L");
+    } else if ((modifierFlags & COMMAND_R) == COMMAND_R) {
+        GHKLOG(@"Command R");
+    } else if ((modifierFlags & FN) == FN) {
+        GHKLOG(@"FN");
+        [self fnPressed:event];
+    }
+}
+
 
 #pragma mark - Register shortcut key
+id globalMonitor_;
+id localMonitor_;
 -(void) registerHotKey {
     
-    CGEventFilterMask mask = 
-        CGEventMaskBit(kCGEventFlagsChanged)
-        | CGEventMaskBit(kCGEventKeyDown)
-        | CGEventMaskBit(kCGEventKeyUp);
-    
-    eventTap = (NSMachPort *)CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0, mask, myCGEventCallback, NULL);
-    
-    [[NSRunLoop mainRunLoop] addPort:eventTap forMode:NSRunLoopCommonModes];
-    CGEventTapEnable((CFMachPortRef)eventTap, true);
+    GlobalEventHandler handler = ^(NSEvent *e){
+        [self handleKeyEvent:e];
+    };
+
+    LocalEventHandler localHandler = ^(NSEvent* e){
+        [self handleKeyEvent:e];
+        return e;
+    };
+
+    globalMonitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:handler];
+    localMonitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:localHandler];
+    [globalMonitor_ retain];
+    [localMonitor_ retain];
 }
 
 -(void) unregisterHotKey {
-    CGEventTapEnable((CFMachPortRef)eventTap, false);
-    [[NSRunLoop mainRunLoop] removePort:eventTap forMode:NSRunLoopCommonModes];
+    [NSEvent removeMonitor:globalMonitor_];
+    [NSEvent removeMonitor:localMonitor_];
 
-    CFRelease(eventTap);
+    [globalMonitor_ release];
+    [localMonitor_ release];
+    globalMonitor_ = nil;
+    localMonitor_ = nil;
 }
 @end

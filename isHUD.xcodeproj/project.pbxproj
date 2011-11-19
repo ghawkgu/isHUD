@@ -52,6 +52,7 @@
 		E0966BAD14724E9D00D2444F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E0966BB314726F5D00D2444F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		E0966BB91472724B00D2444F /* icon-18x18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-18x18.png"; sourceTree = "<group>"; };
+		E097846E1477E0DC00261B03 /* ISHKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISHKeyCode.h; sourceTree = "<group>"; };
 		E0A5466114739F9500E28C2F /* MIT-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE.txt"; sourceTree = "<group>"; };
 		E0A5466214739F9500E28C2F /* README_chs.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README_chs.md; sourceTree = "<group>"; };
 		E0A5466314739F9500E28C2F /* README_jpn.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README_jpn.md; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 		E0966B90147173F300D2444F /* isHUD */ = {
 			isa = PBXGroup;
 			children = (
+				E097846E1477E0DC00261B03 /* ISHKeyCode.h */,
 				E0966B9C147173F300D2444F /* ISHAppDelegate.h */,
 				E0966B9D147173F300D2444F /* ISHAppDelegate.m */,
 				E0C0F7F91476A7F500ECCEC6 /* ISHAppDelegate+HotKey.m */,
