@@ -12,6 +12,8 @@
 
 @interface ISHAppDelegate ()
 @property (strong) NSTimer *timerToFadeOut;
+@property (strong) NSTimer *timerForHotKeyDelay;
+
 - (void) fadeInHud;
 - (void) fadeOutHud;
 - (void) didFadeIn;
@@ -139,8 +141,11 @@
 @synthesize statusMenu = _statusMenu;
 @synthesize panelView = _panelView;
 @synthesize isImage = _isImage;
-@synthesize timerToFadeOut = _timerToFadeOut;
 @synthesize myStatusMenu = _myStatusMenu;
+
+@synthesize timerToFadeOut = _timerToFadeOut;
+@synthesize timerForHotKeyDelay = _timerForHotKeyDelay;
+
 
 // WARNING! Fix this for ARC.
 - (void) dealloc {
@@ -374,8 +379,18 @@
     }
 }
 
+#pragma mark - Hotkey handler
 - (IBAction)onHotKey:(id)sender {
-    [self fadeInHud];
+    self.timerForHotKeyDelay = [NSTimer scheduledTimerWithTimeInterval:HOT_KEY_HOLD_DELAY
+                                                            target:self
+                                                          selector:@selector(fadeInHud)
+                                                          userInfo:nil
+                                                           repeats:NO];
+}
+
+- (IBAction)cancelHotKey:(id)sender {
+    [self.timerForHotKeyDelay invalidate];
+    self.timerForHotKeyDelay = nil;
 }
 
 @end

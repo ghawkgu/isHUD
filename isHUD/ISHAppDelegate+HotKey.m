@@ -5,50 +5,48 @@
 //  Created by ghawkgu on 11/18/11.
 //  Copyright (c) 2011 ghawkgu. All rights reserved.
 //
-#import <Carbon/Carbon.h>
+
 #import "ISHAppDelegate.h"
+#import <ApplicationServices/ApplicationServices.h>
 
-
-pascal OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,void *userData);
-
-// This routine is called when the command-return hotkey is pressed.  It means it's time to change modes for the blue selection box overlay window.
-pascal OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,void *userData)
-{
-    // We can assume our hotkey was pressed
-    GHKLOG(@"Hot key pressed!");
-    // Get the reference to our window and call -switchDirection to reverse the trackingWin's direction.
-    ISHAppDelegate *delegate = (__bridge ISHAppDelegate *)userData;
-    [delegate onHotKey:nil];
+CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,  CGEventRef event, void *refcon);
+CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,  CGEventRef event, void *refcon) {    
+    CGEventFlags modifierFlags = CGEventGetFlags(event);
+    modifierFlags = modifierFlags & NSDeviceIndependentModifierFlagsMask;
+    GHKLOG(@"Modifier flag changed! %llX", modifierFlags);
     
-    return noErr;
+    if ((modifierFlags & NSDeviceIndependentModifierFlagsMask) == kCGEventFlagMaskSecondaryFn) {
+        GHKLOG(@"Fn pressed.");
+        [(ISHAppDelegate *)[NSApp delegate] onHotKey:nil];
+    } else if ((modifierFlags & NSDeviceIndependentModifierFlagsMask) != kCGEventFlagMaskSecondaryFn) {
+        GHKLOG(@"Fn not pressed.");
+        [(ISHAppDelegate *)[NSApp delegate] cancelHotKey:nil];
+    }
     
+    return event; 
 }
 
 @implementation ISHAppDelegate (Hotkey)
-// These hot key
-const UInt32 kMyHotKeyIdentifier='ihud';
-const UInt32 kMyHotKey = kVK_Escape;
-const UInt32 kMyHotKeyModifier = optionKey;
-
-EventHotKeyRef gMyHotKeyRef;
-EventHotKeyID gMyHotKeyID;
-EventHandlerUPP gAppHotKeyFunction;
+NSMachPort *eventTap;
 
 #pragma mark - Register shortcut key
 -(void) registerHotKey {
-    EventTypeSpec eventType;
     
-    gAppHotKeyFunction = NewEventHandlerUPP(MyHotKeyHandler);
-    eventType.eventClass=kEventClassKeyboard;
-    eventType.eventKind=kEventHotKeyPressed;
-    InstallApplicationEventHandler(gAppHotKeyFunction,1,&eventType,self,NULL);
-    gMyHotKeyID.signature=kMyHotKeyIdentifier;
-    gMyHotKeyID.id=1;
+    CGEventFilterMask mask = 
+        CGEventMaskBit(kCGEventFlagsChanged)
+        | CGEventMaskBit(kCGEventKeyDown)
+        | CGEventMaskBit(kCGEventKeyUp);
     
-    RegisterEventHotKey(kMyHotKey, kMyHotKeyModifier, gMyHotKeyID, GetApplicationEventTarget(), 0, &gMyHotKeyRef);
+    eventTap = (NSMachPort *)CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0, mask, myCGEventCallback, NULL);
+    
+    [[NSRunLoop mainRunLoop] addPort:eventTap forMode:NSRunLoopCommonModes];
+    CGEventTapEnable((CFMachPortRef)eventTap, true);
 }
 
 -(void) unregisterHotKey {
-    UnregisterEventHotKey(gMyHotKeyRef);
+    CGEventTapEnable((CFMachPortRef)eventTap, false);
+    [[NSRunLoop mainRunLoop] removePort:eventTap forMode:NSRunLoopCommonModes];
+
+    CFRelease(eventTap);
 }
 @end

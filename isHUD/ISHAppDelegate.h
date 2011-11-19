@@ -17,6 +17,8 @@
 #define HUD_HORIZONTAL_MARGIN   (30)
 #define HUD_HEIGHT              (90)
 
+#define HOT_KEY_HOLD_DELAY      (1.0)
+
 #define MENUITEM_TAG_TOGGLE_LOGIN_ITEM 1
 #define STATUS_MENU_ICON @"icon-18x18.png"
 
@@ -34,4 +36,5 @@
 - (IBAction)quit:(id)sender;
 - (IBAction)toggleLoginItem:(id)sender;
 - (IBAction)onHotKey:(id)sender;
+- (IBAction)cancelHotKey:(id)sender;
 @end
