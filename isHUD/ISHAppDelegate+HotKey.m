@@ -3,7 +3,7 @@
 //  isHUD
 //
 //  Created by ghawkgu on 11/18/11.
-//  Copyright (c) 2011 ghawkgu. All rights reserved.
+//  Copyright (c) 2011 ghawkgu.
 //
 
 #import "ISHAppDelegate.h"

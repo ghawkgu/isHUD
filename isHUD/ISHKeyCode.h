@@ -3,7 +3,7 @@
 //  isHUD
 //
 //  Created by ghawkgu on 11/19/11.
-//  Copyright (c) 2011 ghawkgu. All rights reserved.
+//  Copyright (c) 2011 ghawkgu.
 //
 
 #ifndef isHUD_ISHKeyCode_h
