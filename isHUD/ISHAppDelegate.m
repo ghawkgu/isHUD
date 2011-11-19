@@ -76,7 +76,6 @@
 	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
                                                             kLSSharedFileListSessionLoginItems, NULL);
     LSSharedFileListItemRef listItemRef = [self findLoginItem:loginItems];
-    CFRelease(loginItems);
     
     BOOL retVal = NO;
     
@@ -85,6 +84,7 @@
         CFRelease(listItemRef);
     }
     
+    CFRelease(loginItems);
     return retVal;
 }
 
@@ -360,6 +360,7 @@
 #pragma mark - Menu item event handler
 - (IBAction)quit:(id)sender {
     GHKLOG(@"Bye!");
+    GHKLOG(@"%@", [NSApplication class]);
     [NSApp terminate:nil];
 }
 
