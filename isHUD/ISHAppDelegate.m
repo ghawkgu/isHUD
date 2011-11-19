@@ -287,7 +287,6 @@
     [self.window setHidesOnDeactivate:NO];
     // Make the window behavior like the menu bar.
     [self.window setCollectionBehavior: NSWindowCollectionBehaviorCanJoinAllSpaces];
-    [self.window makeKeyWindow];
         
     CALayer *viewLayer = [CALayer layer];
     [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.05, 0.05, 0.05, HUD_ALPHA_VALUE)]; //RGB plus Alpha Channel
