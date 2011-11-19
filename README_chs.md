@@ -10,10 +10,11 @@
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
 ## 直接下载应用程序
-- [isHUD-current.zip (v0.5)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.6)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
 ## 如何使用
 - 将 isHUD.app 移动到 “应用程序” 目录中, 像其他应用程序一样双击启动。
+- [v0.6 新增功能] 按下Fn，保持1秒后能显示当前使用的输入法。
 
 ## 获取源码
 - [isHUD 托管在 github 上](https://github.com/ghawkgu/isHUD/blob/master/README_chs.md)

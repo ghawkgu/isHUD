@@ -10,10 +10,11 @@ By using the [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/), you c
 ![Screenshot](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-eng.jpg)
 
 ## Download the app binary
-- [isHUD-current.zip (v0.5)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.6)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
 ## How to use
 - Just drag/move the isHUD.app into the Applications directory, open it as other app.
+- [New to v0.6] Press the Fn key and hold for 1 sec. to show the HUD with the current selected input source.
 
 ## Source code
 - [isHUD on github](https://github.com/ghawkgu/isHUD)
