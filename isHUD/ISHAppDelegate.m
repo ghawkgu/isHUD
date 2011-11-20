@@ -17,7 +17,7 @@
 @implementation ISHAppDelegate (Preferences)
 -(void) registerDefaultPreferences {
     NSDictionary *appDefaults = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithInteger:OPTION_R] forKey:DEFAULT_KEY_SELECT_INPUT_SOURCE];
+                                 dictionaryWithObject:[NSNumber numberWithInteger:COMMAND_R] forKey:DEFAULT_KEY_SELECT_INPUT_SOURCE];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 }
 -(void) loadPreferences {
