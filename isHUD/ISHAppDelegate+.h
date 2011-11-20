@@ -10,8 +10,8 @@
 #import <Carbon/Carbon.h>
 
 @interface ISHAppDelegate ()
-@property (strong) NSTimer *timerToFadeOut;
-@property (strong) NSTimer *timerForHotKeyDelay;
+@property (retain) NSTimer *timerToFadeOut;
+@property (retain) NSTimer *timerForHotKeyDelay;
 
 - (void) fadeInHud;
 - (void) fadeOutHud;

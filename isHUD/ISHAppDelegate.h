@@ -14,13 +14,13 @@
     BOOL fadingOut;
     NSUInteger hotkeySelectInputSource;
 }
-@property (unsafe_unretained) IBOutlet NSWindow *window;
-@property (unsafe_unretained) IBOutlet NSTextField *isName;
-@property (unsafe_unretained) IBOutlet NSMenu *statusMenu;
-@property (unsafe_unretained) IBOutlet NSView *panelView;
-@property (unsafe_unretained) IBOutlet NSImageView *isImage;
-@property (strong) NSStatusItem *myStatusMenu;
-@property (strong) ISHPreferencesWindowController *preferencesController;
+@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSTextField *isName;
+@property (assign) IBOutlet NSMenu *statusMenu;
+@property (assign) IBOutlet NSView *panelView;
+@property (assign) IBOutlet NSImageView *isImage;
+@property (retain) NSStatusItem *myStatusMenu;
+@property (retain) ISHPreferencesWindowController *preferencesController;
 
 - (IBAction)quit:(id)sender;
 - (IBAction)toggleLoginItem:(id)sender;

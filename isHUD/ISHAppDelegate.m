@@ -64,13 +64,13 @@
     UInt32 seedValue;
     //Retrieve the list of Login Items and cast them to
     // a NSArray so that it will be easier to iterate.
-    NSArray  *loginItemsArray = (__bridge NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+    NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
     int i = 0;
     for(; i< [loginItemsArray count]; i++){
         LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray
                                                                     objectAtIndex:i];
         //Resolve the item with URL
-        if (LSSharedFileListItemResolve(itemRef, 0, (__bridge CFURLRef*) &url, NULL) == noErr) {
+        if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
             NSString * urlPath = [url path];
             [url release]; // The resolved url must be released!
             if ([urlPath compare:appPath] == NSOrderedSame){
@@ -108,7 +108,7 @@
     
 	// This will retrieve the path for the application
 	// For example, /Applications/test.app
-	CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath]; 
+	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath]; 
     
 	// Create a reference to the shared file list.
     // We are adding it to the current user only.
@@ -214,10 +214,10 @@
 
 #pragma mark - HUD size adjustment
 - (NSString *)getLongestInputSourceName {
-    NSDictionary *filter = [NSDictionary dictionaryWithObject:(__bridge NSString *)kTISCategoryKeyboardInputSource
-                                                       forKey:(__bridge NSString *)kTISPropertyInputSourceCategory];
+    NSDictionary *filter = [NSDictionary dictionaryWithObject:(NSString *)kTISCategoryKeyboardInputSource
+                                                       forKey:(NSString *)kTISPropertyInputSourceCategory];
     
-    NSArray *inputSources = (__bridge NSArray *)TISCreateInputSourceList((__bridge CFDictionaryRef)filter, false);
+    NSArray *inputSources = (NSArray *)TISCreateInputSourceList((CFDictionaryRef)filter, false);
     
     TISInputSourceRef inputSource;
     NSString *name;
@@ -225,10 +225,10 @@
     NSUInteger currentLengthOfName = 0, maxLengthOfName = 0;
     
     for (int i = 0; i < [inputSources count]; i++) {
-        inputSource = (__bridge TISInputSourceRef)[inputSources objectAtIndex:i];
+        inputSource = (TISInputSourceRef)[inputSources objectAtIndex:i];
 
         NSString *isModeId = TISGetInputSourceProperty(inputSource, kTISPropertyInputModeID);        
-        name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
+        name = (NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
         GHKLOG(@"Found input method: %@", name);
         [self dumpInputResource:inputSource];
         
@@ -355,7 +355,7 @@
     GHKLOG(@"Input method changed, %@", notification);
 
     TISInputSourceRef inputSource = TISCopyCurrentKeyboardInputSource();
-    NSString *name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
+    NSString *name = (NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
     //GHKLOG(@"The current is: %@", name);
     [self dumpInputResource:inputSource];
     CFRelease(inputSource);
@@ -368,7 +368,7 @@
         
         [self.isName setStringValue:name];
                         
-        NSURL *iconUrl = (__bridge NSURL *)TISGetInputSourceProperty(inputSource, kTISPropertyIconImageURL);
+        NSURL *iconUrl = (NSURL *)TISGetInputSourceProperty(inputSource, kTISPropertyIconImageURL);
         GHKLOG(@"Icon url:%@", iconUrl);
         // WARNING! Fix this for ARC.
         self.isImage.image = [[[NSImage alloc] initWithContentsOfURL:iconUrl] autorelease];
