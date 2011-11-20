@@ -298,6 +298,9 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(screenSizeChanged:)
                                                             name:NSApplicationDidChangeScreenParametersNotification object:nil];
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self
+                                                        selector:@selector(localeChanged:)
+                                                            name:NSCurrentLocaleDidChangeNotification object:nil];
 }
 
 -(void) initUIComponents {
@@ -380,6 +383,10 @@
 }
 
 - (void)screenSizeChanged:(NSNotification *) notification {
+    [self setUpHUD];
+}
+
+- (void)localeChanged:(NSNotification *) notification {
     [self setUpHUD];
 }
 
