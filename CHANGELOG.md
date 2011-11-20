@@ -1,5 +1,10 @@
 # Change log
 
+## v0.7
+- [Experimental] Built-in support for using right Command or Option key to select input source.
+But you still have to use this feature together with the default system level hot key, which is Option+Command+Space.   
+- [Enhancement] Add Preference menu.
+
 ## v0.6
 - [Bug fix] Sometimes isHUD crashed on startup. Solved.
 - [Experimental] Rewrite the hodkey mechanism. Press the Fn key and hold 

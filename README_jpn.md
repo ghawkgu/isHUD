@@ -5,13 +5,12 @@ Mac OS Xの環境で、私はCommand+スペースとOption+Command+スペース�
 
 isHUDは、入力ソースが変わったときに、スクーンの真ん中で、ヘッドアップが表示されて、選択された入力ソースが表示されます。そうしたら、使っている入力ソースが分かりやすくなります。
 
-[KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/index.html.ja)を使っている方は、[一発で入力メソドを切り替え方（現時点は中国語のみ）](http://www.think-in-g.net/ghawk/blog/2011/11/os-x-mappging-a-single-key-to-select-input-source/)を使ったら楽になるかもしれません。
-
 ![スクリーンショット](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-jpn.jpg)
 
 ## バイナリダウンロード
 - [isHUD-current.zip (v0.6)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
-- [v0.6 機能追加] Fnキーが押押されたまま、一秒後HUDが表示されます。
+- [v0.7 機能追加] Fnキーをダブルクリックすると、HUDが表示されます。
+- [v0.7 機能追加] 右のCommandキーで入力メッソドが切り替えます。なお、この機能を使うには、システムデフォールト入力メッソド変換ホットキー（Command+Option+スペース）を設定してください。
 
 ## ソースコード
 - [isHUDのソースコードはgithubにあります。](https://github.com/ghawkgu/isHUD/blob/master/README_jpn.md)

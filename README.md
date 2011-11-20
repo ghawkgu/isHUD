@@ -14,7 +14,9 @@ By using the [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/), you c
 
 ## How to use
 - Just drag/move the isHUD.app into the Applications directory, open it as other app.
-- [New to v0.6] Press the Fn key and hold for 1 sec. to show the HUD with the current selected input source.
+- [New to v0.7] Double click the Fn key to show the HUD with the current selected input source.
+- [New to v0.7] Built-in support for using right Command or Option key to select input source.
+But you still have to use this feature together with the default system level hot key, which is Option+Command+Space.  
 
 ## Source code
 - [isHUD on github](https://github.com/ghawkgu/isHUD)

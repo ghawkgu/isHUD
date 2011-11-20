@@ -5,8 +5,6 @@
 
 有了isHUD，每当切换输入法的时候，屏幕中央就会出现一个HUD窗口，提示选中的输入法，这样，你无须移动视线就能知道所选的输入法了。
 
-如果你想要更快捷地切换输入法，那么结合[KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/)，可以实现一键切换输入法，[具体方法请看这篇博客中的介绍](http://www.think-in-g.net/ghawk/blog/2011/11/os-x-mappging-a-single-key-to-select-input-source/)。
-
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
 ## 直接下载应用程序
@@ -14,7 +12,10 @@
 
 ## 如何使用
 - 将 isHUD.app 移动到 “应用程序” 目录中, 像其他应用程序一样双击启动。
-- [v0.6 新增功能] 按下Fn，保持1秒后能显示当前使用的输入法。
+- [v0.7 新增功能] 双击Fn能显示当前使用的输入法。在全屏模式下确认当前输入法非常方便。
+- [v0.7 新增功能]内置了切换输入法的支持，可以使用键盘右侧的Command键或Option键切换输入法，
+不过你需要启用系统默认的快捷键，即Option+Command+空格。
+
 
 ## 获取源码
 - [isHUD 托管在 github 上](https://github.com/ghawkgu/isHUD/blob/master/README_chs.md)
