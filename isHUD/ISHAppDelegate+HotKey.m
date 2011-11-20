@@ -1,5 +1,15 @@
+//
+//  ISHAppDelegate+HotKey.m
+//  isHUD
+//
+//  Created by ghawkgu on 11/19/11.
+//  Copyright (c) 2011 ghawkgu.
+//
+
+
 #import "ISHAppDelegate.h"
 #import "ISHKeyCode.h"
+#import "ISHDefaults.h"
 #import <Carbon/Carbon.h>
 
 typedef void (^GlobalEventHandler)(NSEvent*);
@@ -31,11 +41,8 @@ typedef NSEvent* (^LocalEventHandler)(NSEvent*);
 -(void)handleKeyEvent:(NSEvent *)event {
     GHKLOG(@"NSEvent! %lx %f", [event modifierFlags], [event timestamp] );
     NSUInteger modifierFlags = [event modifierFlags];
-    if ((modifierFlags & COMMAND_L)== COMMAND_L) {
-        GHKLOG(@"Command L");
-    } else if ((modifierFlags & COMMAND_R) == COMMAND_R) {
+    if ((modifierFlags & hotkeySelectInputSource) == hotkeySelectInputSource) {
         GHKLOG(@"Command R");
-
         [self selectNextInputSource];
     } else if ((modifierFlags & FN) == FN) {
         GHKLOG(@"FN");

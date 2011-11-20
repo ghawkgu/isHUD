@@ -7,38 +7,25 @@
 //
 
 #import "ISHAppDelegate.h"
+#import "ISHAppDelegate+.h"
+#import "ISHKeyCode.h"
+#import "ISHDefaults.h"
 #import <Carbon/Carbon.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface ISHAppDelegate ()
-@property (strong) NSTimer *timerToFadeOut;
-@property (strong) NSTimer *timerForHotKeyDelay;
-
-- (void) fadeInHud;
-- (void) fadeOutHud;
-- (void) didFadeIn;
-- (void) didFadeOut;
-@end
-
-#pragma mark - Helpers
-@interface ISHAppDelegate (Helper)
--(void) dumpInputResource:(TISInputSourceRef)inputResource;
-@end
-
-#pragma mark - Login item helpers
-@interface ISHAppDelegate (LoginItem)
-- (BOOL) isLoginItem;
-- (void) addAppAsLoginItem;
-- (void) deleteAppFromLoginItem;
-@end
-
-#pragma mark - HotKey
-@interface ISHAppDelegate (HotKey)
-- (void)registerHotKey;
-- (void)unregisterHotKey;
-@end
-
 #pragma mark - Implemetation
+@implementation ISHAppDelegate (Preferences)
+-(void) registerDefaultPreferences {
+    NSDictionary *appDefaults = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithInteger:OPTION_R] forKey:DEFAULT_KEY_SELECT_INPUT_SOURCE];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+}
+-(void) loadPreferences {
+    GHKLOG(@"Preferences changed!");
+    hotkeySelectInputSource = [[NSUserDefaults standardUserDefaults] integerForKey:DEFAULT_KEY_SELECT_INPUT_SOURCE];
+}
+@end
+
 @implementation ISHAppDelegate (Helper)
 -(void) dumpInputResource:(TISInputSourceRef)inputResource {
 #ifdef DEBUG
@@ -168,6 +155,7 @@
 @synthesize panelView = _panelView;
 @synthesize isImage = _isImage;
 @synthesize myStatusMenu = _myStatusMenu;
+@synthesize preferencesController = _preferencesController;
 
 @synthesize timerToFadeOut = _timerToFadeOut;
 @synthesize timerForHotKeyDelay = _timerForHotKeyDelay;
@@ -175,7 +163,9 @@
 // WARNING! Fix this for ARC.
 - (void) dealloc {
     self.timerToFadeOut = nil;
+    self.timerForHotKeyDelay = nil;
     self.myStatusMenu = nil;
+    self.preferencesController = nil;
     [super dealloc];
 }
 
@@ -295,6 +285,8 @@
 {
     // Insert code here to initialize your application
     GHKLOG(@"Initialized!");
+    [self registerDefaultPreferences];
+    [self loadPreferences];
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(inputSourceChanged:)
                                                             name:(NSString *)kTISNotifySelectedKeyboardInputSourceChanged object:nil];
@@ -305,7 +297,7 @@
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self
                                                         selector:@selector(screenSizeChanged:)
-                                                            name:(NSString *)NSApplicationDidChangeScreenParametersNotification object:nil];
+                                                            name:NSApplicationDidChangeScreenParametersNotification object:nil];
 }
 
 -(void) initUIComponents {
@@ -405,6 +397,18 @@
         [self addAppAsLoginItem];
         [self updateLoginItemMenuState:NSOnState];
     }
+}
+
+- (IBAction)openPreferences:(id)sender {
+    GHKLOG(@"Preferences...");
+    if (!self.preferencesController) {
+        ISHPreferencesWindowController *controller = [[ISHPreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindow"];
+        self.preferencesController = controller;
+        [controller release];
+    }
+
+    [self.preferencesController showWindow:nil];
+    [self.preferencesController.window orderFront:nil];
 }
 
 #pragma mark - Hotkey handler
