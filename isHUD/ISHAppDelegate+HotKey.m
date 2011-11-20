@@ -1,13 +1,6 @@
-//
-//  ISHAppDelegate+HotKey.m
-//  isHUD
-//
-//  Created by ghawkgu on 11/18/11.
-//  Copyright (c) 2011 ghawkgu.
-//
-
 #import "ISHAppDelegate.h"
 #import "ISHKeyCode.h"
+#import <Carbon/Carbon.h>
 
 typedef void (^GlobalEventHandler)(NSEvent*);
 typedef NSEvent* (^LocalEventHandler)(NSEvent*);
@@ -23,6 +16,18 @@ typedef NSEvent* (^LocalEventHandler)(NSEvent*);
     lastPressedTimestamp = fnPressedTimestamp;
 }
 
+-(void) selectNextInputSource {
+    CGEventRef spaceD = CGEventCreateKeyboardEvent(NULL, kVK_Space, true);
+    CGEventSetFlags(spaceD, kCGEventFlagMaskCommand | kCGEventFlagMaskAlternate);
+    CGEventRef spaceU = CGEventCreateKeyboardEvent(NULL, kVK_Space, false);
+    
+    CGEventPost(kCGHIDEventTap, spaceD);
+    CGEventPost(kCGHIDEventTap, spaceU);
+
+    CFRelease(spaceD);
+    CFRelease(spaceU);
+}
+
 -(void)handleKeyEvent:(NSEvent *)event {
     GHKLOG(@"NSEvent! %lx %f", [event modifierFlags], [event timestamp] );
     NSUInteger modifierFlags = [event modifierFlags];
@@ -30,6 +35,8 @@ typedef NSEvent* (^LocalEventHandler)(NSEvent*);
         GHKLOG(@"Command L");
     } else if ((modifierFlags & COMMAND_R) == COMMAND_R) {
         GHKLOG(@"Command R");
+
+        [self selectNextInputSource];
     } else if ((modifierFlags & FN) == FN) {
         GHKLOG(@"FN");
         [self fnPressed:event];
@@ -45,12 +52,12 @@ id localMonitor_;
     GlobalEventHandler handler = ^(NSEvent *e){
         [self handleKeyEvent:e];
     };
-
+    
     LocalEventHandler localHandler = ^(NSEvent* e){
         [self handleKeyEvent:e];
         return e;
     };
-
+    
     globalMonitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:handler];
     localMonitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSFlagsChangedMask handler:localHandler];
     [globalMonitor_ retain];
@@ -60,7 +67,7 @@ id localMonitor_;
 -(void) unregisterHotKey {
     [NSEvent removeMonitor:globalMonitor_];
     [NSEvent removeMonitor:localMonitor_];
-
+    
     [globalMonitor_ release];
     [localMonitor_ release];
     globalMonitor_ = nil;

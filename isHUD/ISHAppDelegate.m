@@ -20,6 +20,11 @@
 - (void) didFadeOut;
 @end
 
+#pragma mark - Helpers
+@interface ISHAppDelegate (Helper)
+-(void) dumpInputResource:(TISInputSourceRef)inputResource;
+@end
+
 #pragma mark - Login item helpers
 @interface ISHAppDelegate (LoginItem)
 - (BOOL) isLoginItem;
@@ -34,6 +39,27 @@
 @end
 
 #pragma mark - Implemetation
+@implementation ISHAppDelegate (Helper)
+-(void) dumpInputResource:(TISInputSourceRef)inputResource {
+#ifdef DEBUG
+    NSString *isId = TISGetInputSourceProperty(inputResource, kTISPropertyInputSourceID);
+    NSString *isModeId = TISGetInputSourceProperty(inputResource, kTISPropertyInputModeID);
+    NSString *isBundleId = TISGetInputSourceProperty(inputResource, kTISPropertyBundleID);
+    NSString *localizedName = TISGetInputSourceProperty(inputResource, kTISPropertyLocalizedName);
+    BOOL isSelectable = CFBooleanGetValue(TISGetInputSourceProperty(inputResource, kTISPropertyInputSourceIsSelectCapable));
+    BOOL enableCapable = CFBooleanGetValue(TISGetInputSourceProperty(inputResource, kTISPropertyInputSourceIsEnableCapable));
+    BOOL isCurrentEnabled = CFBooleanGetValue(TISGetInputSourceProperty(inputResource, kTISPropertyInputSourceIsEnabled));
+    GHKLOG(@"==========Dump input source (%@) ===========", isId);
+    GHKLOG(@"=====>>>>> mode id (%@) ", isModeId);
+    GHKLOG(@"=====>>>>> bundle id (%@) ", isBundleId);
+    GHKLOG(@"=====>>>>> localized name (%@) ", localizedName);
+    GHKLOG(@"=====>>>>> enable capable (%@) ", enableCapable ? @"YES" : @"NO");
+    GHKLOG(@"=====>>>>> is enabled (%@) ", isCurrentEnabled ? @"YES" : @"NO");
+    GHKLOG(@"=====>>>>> select capable (%@) ", isSelectable ? @"YES" : @"NO");
+#endif
+}
+@end
+
 @implementation ISHAppDelegate (LoginItem)
 // I copied the codes from the following blog. And a little modification.
 // http://cocoatutorial.grapewave.com/2010/02/creating-andor-removing-a-login-item/
@@ -146,7 +172,6 @@
 @synthesize timerToFadeOut = _timerToFadeOut;
 @synthesize timerForHotKeyDelay = _timerForHotKeyDelay;
 
-
 // WARNING! Fix this for ARC.
 - (void) dealloc {
     self.timerToFadeOut = nil;
@@ -214,17 +239,21 @@
 
         NSString *isModeId = TISGetInputSourceProperty(inputSource, kTISPropertyInputModeID);        
         name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
-        
-        if ([isModeId isEqualToString:name]) continue; //Bypass some input source modes.
-        
         GHKLOG(@"Found input method: %@", name);
+        [self dumpInputResource:inputSource];
+        
+        if ([isModeId isEqualToString:name]) {
+            GHKLOG(@">>>>>>>>>>> passed.");
+            continue;
+        } //Bypass some input source modes.
+        
         currentLengthOfName = [name length];
         if (currentLengthOfName > maxLengthOfName) {
             maxLengthOfName = currentLengthOfName;
             nameForMaxLength = name;
         }
     }
-    
+
     [inputSources release];
     
     GHKLOG(@"The input method with the longest name is: %@", nameForMaxLength);
@@ -332,7 +361,8 @@
 
     TISInputSourceRef inputSource = TISCopyCurrentKeyboardInputSource();
     NSString *name = (__bridge NSString *)TISGetInputSourceProperty(inputSource, kTISPropertyLocalizedName);
-    GHKLOG(@"The im name is: %@", name);
+    //GHKLOG(@"The current is: %@", name);
+    [self dumpInputResource:inputSource];
     CFRelease(inputSource);
     
     static NSString *previousIsName = nil;
@@ -364,7 +394,6 @@
 #pragma mark - Menu item event handler
 - (IBAction)quit:(id)sender {
     GHKLOG(@"Bye!");
-    GHKLOG(@"%@", [NSApplication class]);
     [NSApp terminate:nil];
 }
 
@@ -395,5 +424,4 @@
 - (IBAction)showHud:(id)sender {
     [self fadeInHud];
 }
-
 @end
