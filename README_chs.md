@@ -15,7 +15,7 @@
 - [v0.7 新增功能] 双击Fn能显示当前使用的输入法。在全屏模式下确认当前输入法非常方便。
 - [v0.7 新增功能]内置了切换输入法的支持，可以使用键盘右侧的Command键或Option键切换输入法，
 不过你需要启用系统默认的快捷键，即Option+Command+空格。
-
+- ![设置](http://www.think-in-g.net/share/isHUD/screenshot/isHUD-settings-chn.jpg)
 
 ## 获取源码
 - [isHUD 托管在 github 上](https://github.com/ghawkgu/isHUD/blob/master/README_chs.md)

@@ -15,6 +15,7 @@ With isHUD, everytime you change the input source, a HUD will appear right in th
 - [New to v0.7] Double click the Fn key to show the HUD with the current selected input source.
 - [New to v0.7] Built-in support for using right Command or Option key to select input source.
 But you still have to use this feature together with the default system level hot key, which is Option+Command+Space.  
+- ![Settings](http://www.think-in-g.net/share/isHUD/screenshot/isHUD-settings-eng.jpg)
 
 ## Source code
 - [isHUD on github](https://github.com/ghawkgu/isHUD)

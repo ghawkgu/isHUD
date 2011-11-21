@@ -11,6 +11,7 @@ isHUDは、入力ソースが変わったときに、スクーンの真ん中で
 - [isHUD-current.zip (v0.7)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 - [v0.7 機能追加] Fnキーをダブルクリックすると、HUDが表示されます。
 - [v0.7 機能追加] 右のCommandキーで入力メッソドが切り替えます。なお、この機能を使うには、システムデフォールト入力メッソド変換ホットキー（Command+Option+スペース）を設定してください。
+- ![設定](http://www.think-in-g.net/share/isHUD/screenshot/isHUD-settings-jpn.jpg)
 
 ## ソースコード
 - [isHUDのソースコードはgithubにあります。](https://github.com/ghawkgu/isHUD/blob/master/README_jpn.md)
