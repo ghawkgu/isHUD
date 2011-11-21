@@ -213,6 +213,14 @@
 }
 
 #pragma mark - HUD size adjustment
+- (NSDictionary *) getLabelAttributes {
+    NSFont *font = [NSFont fontWithName:@"Lucida Grande" size:24.0];
+    NSDictionary *attrsDictionary =
+    [NSDictionary dictionaryWithObject:font
+                                forKey:NSFontAttributeName];
+    return attrsDictionary;
+}
+
 - (NSString *)getLongestInputSourceName {
     NSDictionary *filter = [NSDictionary dictionaryWithObject:(NSString *)kTISCategoryKeyboardInputSource
                                                        forKey:(NSString *)kTISPropertyInputSourceCategory];
@@ -222,7 +230,8 @@
     TISInputSourceRef inputSource;
     NSString *name;
     NSString *nameForMaxLength;
-    NSUInteger currentLengthOfName = 0, maxLengthOfName = 0;
+    CGFloat currentLengthOfName = 0, maxLengthOfName = 0;
+    NSDictionary *attributes = [self getLabelAttributes];
     
     for (int i = 0; i < [inputSources count]; i++) {
         inputSource = (TISInputSourceRef)[inputSources objectAtIndex:i];
@@ -237,7 +246,8 @@
             continue;
         } //Bypass some input source modes.
         
-        currentLengthOfName = [name length];
+        NSSize stringSize = [name sizeWithAttributes:attributes];
+        currentLengthOfName = stringSize.width;
         if (currentLengthOfName > maxLengthOfName) {
             maxLengthOfName = currentLengthOfName;
             nameForMaxLength = name;
