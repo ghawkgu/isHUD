@@ -8,7 +8,7 @@
 ![屏幕截图和说明](http://www.think-in-g.net/ghawk/blog/wp-content/uploads/2011/11/isHUD-screenshot-chs.jpg)
 
 ## 直接下载应用程序
-- [isHUD-current.zip (v0.6)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
+- [isHUD-current.zip (v0.7)](http://www.think-in-g.net/share/isHUD/isHUD-current.zip)
 
 ## 如何使用
 - 将 isHUD.app 移动到 “应用程序” 目录中, 像其他应用程序一样双击启动。
