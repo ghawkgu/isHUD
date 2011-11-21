@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E04731B31479D19C00577580 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E04731B21479D19C00577580 /* NSAttributedString+Hyperlink.m */; };
 		E06496EC14737582008B28E0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E06496EB14737582008B28E0 /* icon.icns */; };
 		E093DDE9147525AE00ACB3FA /* CHANGELOG_jpn.md in Resources */ = {isa = PBXBuildFile; fileRef = E093DDE8147525AE00ACB3FA /* CHANGELOG_jpn.md */; };
 		E0966B8B147173F300D2444F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0966B8A147173F300D2444F /* Cocoa.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E04731B11479D19C00577580 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
+		E04731B21479D19C00577580 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
 		E06496E71473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		E06496E81473754E008B28E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E06496E914737556008B28E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -83,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E04731AF1479D16A00577580 /* CocoaExtension */ = {
+			isa = PBXGroup;
+			children = (
+				E04731B11479D19C00577580 /* NSAttributedString+Hyperlink.h */,
+				E04731B21479D19C00577580 /* NSAttributedString+Hyperlink.m */,
+			);
+			name = CocoaExtension;
+			sourceTree = "<group>";
+		};
 		E093DDE71475255D00ACB3FA /* Documents */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +112,7 @@
 		E0966B7B147173F300D2444F = {
 			isa = PBXGroup;
 			children = (
+				E04731AF1479D16A00577580 /* CocoaExtension */,
 				E093DDE71475255D00ACB3FA /* Documents */,
 				E0966B90147173F300D2444F /* isHUD */,
 				E0966B89147173F300D2444F /* Frameworks */,
@@ -246,6 +259,7 @@
 				E0966B9E147173F300D2444F /* ISHAppDelegate.m in Sources */,
 				E0C0F7FA1476A7F500ECCEC6 /* ISHAppDelegate+HotKey.m in Sources */,
 				E0988E2114790BAD00E75145 /* ISHPreferencesWindowController.m in Sources */,
+				E04731B31479D19C00577580 /* NSAttributedString+Hyperlink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
