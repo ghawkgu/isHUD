@@ -93,6 +93,7 @@
 				E04731B21479D19C00577580 /* NSAttributedString+Hyperlink.m */,
 			);
 			name = CocoaExtension;
+			path = isHUD/Cocoa;
 			sourceTree = "<group>";
 		};
 		E093DDE71475255D00ACB3FA /* Documents */ = {
