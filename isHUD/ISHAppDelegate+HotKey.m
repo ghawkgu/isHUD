@@ -18,7 +18,7 @@ typedef NSEvent* (^LocalEventHandler)(NSEvent*);
 @implementation ISHAppDelegate (Hotkey)
 
 -(void) fnPressed:(NSEvent*)event {
-    static NSTimeInterval lastPressedTimestamp = NSTimeIntervalSince1970;
+    static NSTimeInterval lastPressedTimestamp = 0;
     NSTimeInterval fnPressedTimestamp = [event timestamp];
     if (fnPressedTimestamp - lastPressedTimestamp <= HOT_KEY_DOUBLE_STRIKE_INTERVAL) {
         [self showHud:nil];
